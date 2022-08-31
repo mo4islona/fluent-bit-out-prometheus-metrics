@@ -698,6 +698,10 @@ func FLBPluginFlushCtx(ctx, data unsafe.Pointer, length C.int, tag *C.char) int 
 				msgKeys += fmt.Sprintf("|%s=%s|", lk, records[lk])
 			}
 
+			if records[lk] == "" {
+				continue
+			}
+
 			// This takes the value of a fluent bit key and assigns it to a GoLang map
 			metricLabels[lk] = fmt.Sprintf("%v", records[lk])
 		}
